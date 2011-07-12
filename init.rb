@@ -1,7 +1,5 @@
 require 'redmine'
 require 'dispatcher'
-require 'bundler'
-Bundler.setup(:default)
 require 'pivotal_tracker'
 require 'unicode'
 
