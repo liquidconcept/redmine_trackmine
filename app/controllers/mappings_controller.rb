@@ -9,7 +9,7 @@ class MappingsController < ApplicationController
   end
 
   def new
-    @mapping = Mapping.new :estimations => { 1 => 1, 2 => 4, 3 => 10 },
+    @mapping = Mapping.new :estimations => { 1 => 1, 2 => 2, 3 => 3, 5 => 5, 8 => 8 },
                            :story_types => { 'feature' => 'Feature', 'bug' => 'Bug', 'chore' => 'Support' }
                                   
     @projects = Project.all
@@ -18,7 +18,7 @@ class MappingsController < ApplicationController
   end
   
   def edit
-    @mapping = Mapping.find params[:id]   
+    @mapping = Mapping.find params[:id]
   end
 
   def create
@@ -26,7 +26,7 @@ class MappingsController < ApplicationController
                                                   :story_types => params[:story_types]
     
     @mapping.tracker_project_id = params[:tracker_project_id]
-    @mapping.tracker_project_name = PivotalTracker::Project.find(params[:tracker_project_id].to_i).name 
+    @mapping.tracker_project_name = PivotalTracker::Project.find(params[:tracker_project_id].to_i).name
     if @mapping.save
       flash[:notice] = 'Mapping was successfully added.'
       redirect_to :action => "index"
@@ -56,7 +56,7 @@ class MappingsController < ApplicationController
     else
       flash[:error] = "Mapping could not be removed."
     end
-    redirect_to :action => "index", :project_id => @project    
+    redirect_to :action => "index", :project_id => @project
   end
 
   def xhr_labels
